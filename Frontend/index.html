@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+    body {
+      background: #E5E7E9;
+    }
+      .precios {
+        height: 25rem;
+        transform: translateY(-3rem);
+      }
+
+      .monedas {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .encabezado {
+        height: 18rem;
+      }
+
+      .lista {
+        padding: 1rem 3rem;
+      }
+
+      li:nth-child(1){
+        color: red;
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+      }
+    </style>
+
+    <title>API PUBLICA CODX</title>
+  </head>
+  <body>
+    <div class="encabezado container-fluid bg-primary text-light p-5">
+      <h2 class="text-center">PRECIO DE MONEDAS MUNDIALES Y SUS CAMBIOS</h2>
+        <div class="monedas d-flex container mt-5 p-3 justify-content-around rounded">
+          <!-- CUANDO HAGAN CLICK PINTARA EL NOMBRE EN LA URL CON LA VARIABLE QUE YA TIENE EL VALOR EN LA FUNCION-->
+          <button class="btn btn-warning" onclick="obtener('dolar')">Dolar</button>
+          <button class="btn btn-warning" onclick="obtener('euro')">Euro</button>
+
+          <button class="btn btn-warning" onclick="obtener('dolar')">Dolar</button>
+          <button class="btn btn-warning" onclick="obtener('euro')">Euro</button>
+          <button class="btn btn-warning" onclick="obtener('euro')">Euro</button>
+
+        </div>
+    </div>
+
+    <!-- EN ESTA VIÑETA SE MOSTRARAN CADA UNO DE LOS DATOS SEGUN RL BOTON -->
+    <div class="container bg-light p-5 rounded precios">
+      <h3 class="text-primary">PRECIOS DEL AÑO</h3>
+      <div class="lista">
+        <ul id="resultado" class="list-group">
+        </ul>
+      </div>
+    </div>
+
+    <script src="conexion-be.js"></script>
+  </body>
+</html>

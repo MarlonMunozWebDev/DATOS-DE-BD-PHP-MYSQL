@@ -1,0 +1,41 @@
+<?php
+//FIREFOX - LE DECIMOS QUE EL RESULTADO DE ESTE ARCHIVO VA SER EN FORMATO JSON
+header('Content-Type: application/json');
+
+//COORS
+//AVECES LOS NAVEGADORES BLOQUEAN ALGUNAS PETICIONES QUE LE HACEMOS AL SITIO WWEB. CON  EL HEADER("") VAMOS PERMITIR QUE PUEDAN CONSUMIR NUESTRA API
+//ACON SERVIDOR INTERNOS PONEMOS NUESTRO DOMINIO EN VEZ DEL ASTERISCO
+header('Access-Control-Allow-Origin: *');
+
+//ARCHIVO QUE ME VA ESTAR RESPONDIENDO ATRAVES DE LA URL
+//$datos = ['dolar'=>500, 'euro'=>700];
+
+//GUARDAMOS EN UNA VARIABLE EL VALOR INSERTADO POR LA URL (GET)
+//$peticion = $_GET['variable'];
+
+
+
+//SI EL GET VIENE DE LA MONEDA Y ES IGUAL A EURO O (||) DOLAR
+if($_GET['moneda']== 'euro' || $_GET['moneda']== 'dolar') {
+  //echo 'Usted coloco Euro';
+
+  //INCLUIMOS LA CONEXION ALA BD
+  include_once 'conexion.php';
+
+  //HACEMOS LA SENTENCIA PREPARADA DINAMICA SQL PARA ACCEDER ALOS DATOS DE LA TABLA
+  //CONCATENAMOS (.) PARA QUE BUSQUE EN LA TABLA SEGUN ESCRITO EL USUARIO
+  $sql = 'SELECT * FROM '.$_GET['moneda'];
+  //VARIABLE QUE GUARDARA TODA LA CONEXION PDO Y LA SENTECIA SQL
+  $sentencia = $pdo->prepare($sql);
+  //LE PONEMOS LA FUNCION PARA QUE SE EJECUTE
+  $sentencia->execute();
+
+  //GUARDAMOS EN RESULTADO EL FETCHALL CON EL QUE NOS DEVOLVERA UN ARRAY
+  $datos = $sentencia->fetchAll();
+
+
+} else {
+  echo 'Solicitud no encontrada';
+}
+
+echo json_encode($datos);
